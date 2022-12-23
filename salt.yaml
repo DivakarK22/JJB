@@ -44,7 +44,7 @@
       - timed: "@hourly"
 
 - job:
-    name: hooks-tech-jenkins
+    name: hooks-jenkins-salt
     defaults: global
     node: master
     scm:
