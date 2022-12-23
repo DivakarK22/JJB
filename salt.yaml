@@ -3,14 +3,12 @@
     description: 'Managed by jenkins-job-builder - do not edit via web interface. See git@stash:tech/jenkins.git'
     project-type: freestyle
     concurrent: false
-    node: master
+    node: Ansible
     views:
       - project-view
     logrotate:
-      daysToKeep: 30
-      numToKeep: 30
-      artifactDaysToKeep: -1
-      artifactNumToKeep: -1
+      daysToKeep: 1
+      numToKeep: 5
     publishers:
       - email:
           recipients: dvkr22@gmail.com
@@ -22,13 +20,42 @@
 
 # Usersetup syncs
 - job:
-    name: ci-management-project-view
-    project-name: ci-management
-    views:
-      - project-view
+    name: git-repos-update
     defaults: global
     builders:
-      - shell: "lsblk"
+      - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/git-repo-update-all.yml"
     triggers:
       - timed: "@hourly"
   
+- job:
+    name: repos-update
+    defaults: global
+    builders:
+      - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/repo-update.yaml"
+    triggers:
+      - timed: "@hourly"
+
+- job:
+    name: salt-highstate
+    defaults: global
+    builders:
+      - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/salt-update.yaml"
+    triggers:
+      - timed: "@hourly"
+
+- job:
+    name:  update-salt-files
+    defaults: global
+    builders:
+      - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/salt-repo.yaml
+"
+    triggers:
+      - timed: "@hourly"
+
+- job:
+    name: stress-test
+    defaults: global
+    builders:
+      - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/stress.yaml"
+    triggers:
+      - timed: "@hourly"
