@@ -44,13 +44,17 @@
       - timed: "@hourly"
 
 - job:
-    name:  update-salt-files
+    name: hooks-tech-jenkins
     defaults: global
-    builders:
-      - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/salt-repo.yaml"   triggers:
+    node: master
+    scm:
+      - git:
+          url: git@github.com:DivakarK22/salt.git 
+          branches:
+            - master
     triggers:
       - pollscm:
-          cron: "@hourly"
+          cron: "*/5 * * * *"
 
 - job:
     name: stress-test
