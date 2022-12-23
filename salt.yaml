@@ -46,7 +46,7 @@
 - job:
     name: hooks-jenkins-salt
     defaults: global
-    node: master
+    node: Ansible(deploy)
     scm:
       - git:
           url: git@github.com:DivakarK22/salt.git 
