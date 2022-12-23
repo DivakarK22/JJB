@@ -1,0 +1,4 @@
+- job-template:
+    name: 'pre-build-{proj}-{repo}'
+    builders:
+        - shell: 'echo building {proj} for {repo}'
