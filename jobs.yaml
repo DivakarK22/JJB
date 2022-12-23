@@ -18,7 +18,6 @@
           max-lines: 500
           fail-build: false
 
-# Usersetup syncs
 - job:
     name: git-repos-update
     defaults: global
@@ -78,11 +77,3 @@
     triggers:
       - pollscm:
           cron: "* * * * *"
-
-- job:
-    name: stress-123
-    defaults: global
-    builders:
-      - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/stress.yaml"
-    triggers:
-      - timed: "@hourly"
