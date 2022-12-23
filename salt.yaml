@@ -50,7 +50,7 @@
       - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/salt-repo.yaml"   triggers:
     triggers:
       - pollscm:
-         cron: "@hourly"
+          cron: "@hourly"
 
 - job:
     name: stress-test
