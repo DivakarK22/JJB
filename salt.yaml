@@ -1,5 +1,11 @@
+---
 - project:
-    name: Test-salt
-    command: 'ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/salt-repo.yaml'
+    name: packer-common-view
+    view-name: packer
+    views:
+      - common-view
+
+- project:
+    name: packer-verify
     jobs:
-        - 'Test'
+      - github-packer-verify
