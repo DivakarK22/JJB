@@ -1,11 +1,3 @@
-- job-template:
-    # template specific defaults
-    command: 'ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/salt-repo.yaml'
-    type: freestyle
-    # template settings
-    name: 'Test-salt-job'
-    builders:
-      - shell: 'ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/salt-repo.yaml'
 - project:
     name: Test-salt
     command: 'ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/salt-repo.yaml'
