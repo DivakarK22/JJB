@@ -1,11 +1,6 @@
----
 - project:
-    name: packer-common-view
-    view-name: packer
-    views:
-      - common-view
-
-- project:
-    name: packer-verify
+    name: job-1
+    proj: my-proj
+    repo: my-repo
     jobs:
-      - github-packer-verify
+        - 'pre-build-{proj}-{repo}'
