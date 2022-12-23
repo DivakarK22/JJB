@@ -28,3 +28,6 @@
       - shell: "lsblk"
     triggers:
       - timed: "@hourly"
+    views:
+      - project-view
+  
