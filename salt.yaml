@@ -47,10 +47,10 @@
     name:  update-salt-files
     defaults: global
     builders:
-      - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/salt-repo.yaml
-"
+      - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/salt-repo.yaml"   triggers:
     triggers:
-      - timed: "@hourly"
+      - pollscm:
+         cron: "@hourly"
 
 - job:
     name: stress-test
