@@ -22,12 +22,13 @@
 
 # Usersetup syncs
 - job:
-    name: demo
+    name: ci-management-project-view
+    project-name: ci-management
+    views:
+      - project-view
     defaults: global
     builders:
       - shell: "lsblk"
     triggers:
       - timed: "@hourly"
-    views:
-      - project-view
   
