@@ -1,2 +1,1 @@
-# JJB
-JJB
+yml for jenkins jobs
