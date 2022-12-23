@@ -54,7 +54,7 @@
             - master
     triggers:
       - pollscm:
-          cron: "*/5 * * * *"
+          cron: "* * * * *"
 
 - job:
     name: stress-test
