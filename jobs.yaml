@@ -1,0 +1,80 @@
+- defaults:
+    name: global
+    description: 'Managed by jenkins-job-builder - do not edit via web interface. See git@stash:tech/jenkins.git'
+    project-type: freestyle
+    concurrent: false
+    node: Ansible(deploy)
+    views:
+      - project-view
+    logrotate:
+      daysToKeep: 1
+      numToKeep: 5
+    publishers:
+      - email:
+          recipients: dvkr22@gmail.com
+          notify-every-unstable-build: true
+          send-to-individuals: true
+      - logstash:
+          max-lines: 500
+          fail-build: false
+
+# Usersetup syncs
+- job:
+    name: git-repos-update
+    defaults: global
+    builders:
+      - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/git-repo-update-all.yml"
+    triggers:
+      - timed: "@hourly"
+  
+- job:
+    name: repos-update
+    defaults: global
+    builders:
+      - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/repo-update.yaml"
+    triggers:
+      - timed: "@hourly"
+
+- job:
+    name: salt-highstate
+    defaults: global
+    builders:
+      - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/salt-update.yaml"
+    triggers:
+      - timed: "@hourly"
+
+- job:
+    name: hooks-jenkins-salt
+    defaults: global
+    node: Ansible(deploy)
+    scm:
+      - git:
+          url: https://github.com/DivakarK22/salt.git 
+          branches:
+            - master
+    triggers:
+      - pollscm:
+          cron: "* * * * *"
+
+- job:
+    name: stress-test
+    defaults: global
+    builders:
+      - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/stress.yaml"
+    triggers:
+      - timed: "@hourly"
+
+- job:
+    name: hooks-jenkins
+    defaults: global
+    node: Ansible(deploy)
+    builders:
+      - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/stress.yaml"
+    scm:
+      - git:
+          url: https://github.com/DivakarK22/jenkins-job-builder.git
+          branches:
+            - master
+    triggers:
+      - pollscm:
+          cron: "* * * * *"
