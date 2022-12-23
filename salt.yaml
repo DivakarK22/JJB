@@ -4,6 +4,8 @@
     project-type: freestyle
     concurrent: false
     node: master
+    views:
+      - project-view
     logrotate:
       daysToKeep: 30
       numToKeep: 30
