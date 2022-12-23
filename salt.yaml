@@ -3,7 +3,7 @@
     description: 'Managed by jenkins-job-builder - do not edit via web interface. See git@stash:tech/jenkins.git'
     project-type: freestyle
     concurrent: false
-    node: Ansible
+    node: Ansible(deploy)
     views:
       - project-view
     logrotate:
