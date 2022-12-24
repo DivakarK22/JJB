@@ -24,9 +24,8 @@
     builders:
       - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/git-repo-update-all.yml"
     triggers:
-      - reverse:
-          jobs: hooks-jenkins-salt
-          result: 'success'
+      - pollscm:
+          cron: "* * * * *"
   
 - job:
     name: repos-update
@@ -34,8 +33,8 @@
     builders:
       - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/repo-update.yaml"
     triggers:
-      - timed: "@hourly"
-
+      - pollscm:
+          cron: "* * * * *"
 - job:
     name: salt-highstate
     defaults: global
