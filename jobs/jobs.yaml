@@ -9,14 +9,6 @@
     logrotate:
       daysToKeep: 1
       numToKeep: 5
-- defaults:
-    name: Test
-    description: 'Managed by jenkins-job-builder - do not edit via web interface. See git@stash:tech/jenkins.git'
-    project-type: freestyle
-    concurrent: false
-    node: Ansible(deploy)
-    views:
-      - Test
 - job:
     name: git-repos-update
     defaults: global
@@ -24,16 +16,13 @@
       - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/git-repo-update-all.yml"
     triggers:
       - timed: "* * * * *"
-
-  
 - job:
     name: repos-update
-    defaults: Test
+    defaults: global
     builders:
       - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/repo-update.yaml"
     triggers:
       - timed: "* * * * *"
-
 - job:
     name: salt-highstate
     defaults: global
@@ -43,7 +32,6 @@
       - reverse:
           jobs: hooks-jenkins-salt
           result: 'success'
-
 - job:
     name: hooks-jenkins-salt
     defaults: global
@@ -55,13 +43,11 @@
             - master
     triggers:
       - timed: "* * * * *"
-
 - job:
     name: stress-test
     defaults: global
     builders:
       - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/stress.yaml"
-
 - job:
     name: hooks-jenkins
     defaults: global
