@@ -61,8 +61,6 @@
     defaults: global
     builders:
       - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/stress.yaml"
-    triggers:
-      - timed: "* * * * *"
 
 - job:
     name: hooks-jenkins
