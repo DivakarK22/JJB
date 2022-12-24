@@ -39,11 +39,10 @@
     defaults: global
     builders:
       - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/salt-update.yaml"
-    publishers:
-      - trigger-parameterized-builds:
-          - project: 'hooks-jenkins-salt'
-            current-parameters: true
-            condition: 'SUCCESS'
+    triggers:
+      - reverse:
+          jobs: hooks-jenkins-salt
+          result: 'success'
 
 - job:
     name: hooks-jenkins-salt
