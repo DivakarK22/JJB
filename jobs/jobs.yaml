@@ -14,15 +14,15 @@
     defaults: global
     builders:
       - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/git-repo-update-all.yml"
-    triggers:
-      - timed: "* * * * *"
+ #   triggers:
+ #     - timed: "* * * * *"
 - job:
     name: repos-update
     defaults: global
     builders:
       - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/repo-update.yaml"
-    triggers:
-      - timed: "* * * * *"
+ #   triggers:
+ #    - timed: "* * * * *"
 - job:
     name: salt-highstate
     defaults: global
