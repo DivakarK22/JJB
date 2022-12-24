@@ -24,7 +24,9 @@
     builders:
       - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/git-repo-update-all.yml"
     triggers:
-      - timed: "@hourly"
+      - reverse:
+          jobs: hooks-jenkins-salt
+          result: 'success'
   
 - job:
     name: repos-update
