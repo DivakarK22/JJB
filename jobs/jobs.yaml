@@ -16,7 +16,7 @@
     concurrent: false
     node: Ansible(deploy)
     views:
-      - project-view
+      - Test
 - job:
     name: git-repos-update
     defaults: global
