@@ -9,15 +9,14 @@
     logrotate:
       daysToKeep: 1
       numToKeep: 5
-    publishers:
-      - email:
-          recipients: dvkr22@gmail.com
-          notify-every-unstable-build: true
-          send-to-individuals: true
-      - logstash:
-          max-lines: 500
-          fail-build: false
-
+- defaults:
+    name: Test
+    description: 'Managed by jenkins-job-builder - do not edit via web interface. See git@stash:tech/jenkins.git'
+    project-type: freestyle
+    concurrent: false
+    node: Ansible(deploy)
+    views:
+      - project-view
 - job:
     name: git-repos-update
     defaults: global
@@ -29,7 +28,7 @@
   
 - job:
     name: repos-update
-    defaults: global
+    defaults: Test
     builders:
       - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/repo-update.yaml"
     triggers:
