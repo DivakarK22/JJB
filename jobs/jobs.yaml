@@ -42,7 +42,8 @@
           branches:
             - master
     triggers:
-      - timed: "* * * * *"
+      - pollscm:
+          cron: "* * * * *"
 - job:
     name: stress-test
     defaults: global
