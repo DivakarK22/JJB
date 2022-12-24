@@ -24,8 +24,8 @@
     builders:
       - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/git-repo-update-all.yml"
     triggers:
-      - pollscm:
-          cron: "* * * * *"
+      - timed: "* * * * *"
+
   
 - job:
     name: repos-update
@@ -33,8 +33,8 @@
     builders:
       - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/repo-update.yaml"
     triggers:
-      - pollscm:
-          cron: "* * * * *"
+      - timed: "* * * * *"
+
 - job:
     name: salt-highstate
     defaults: global
@@ -55,8 +55,7 @@
           branches:
             - master
     triggers:
-      - pollscm:
-          cron: "* * * * *"
+      - timed: "* * * * *"
 
 - job:
     name: stress-test
