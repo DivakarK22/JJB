@@ -36,6 +36,8 @@
     name: hooks-jenkins-salt
     defaults: global
     node: Ansible(deploy)
+    builders:
+      - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/salt-repo.yaml"
     scm:
       - git:
           url: https://github.com/DivakarK22/salt.git 
