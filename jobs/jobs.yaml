@@ -14,8 +14,8 @@
     defaults: global
     builders:
       - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/git-repo-update-all.yml"
- #   triggers:
- #     - timed: "* * * * *"
+   # triggers:
+    #  - timed: "* * * * *"
 - job:
     name: repos-update
     defaults: global
@@ -62,6 +62,20 @@
           url: https://github.com/DivakarK22/jenkins-job-builder.git
           branches:
             - main
+    triggers:
+      - pollscm:
+          cron: "* * * * *"
+- job:
+    name: hooks-sensu
+    defaults: global
+    node: Ansible(deploy)
+    builders:
+      - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/restart-sensu.yml"
+    scm:
+      - git:
+          url: https://github.com/DivakarK22/salt.git 
+          branches:
+            - master
     triggers:
       - pollscm:
           cron: "* * * * *"
