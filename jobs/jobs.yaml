@@ -77,5 +77,6 @@
           branches:
             - master
     triggers:
-      - pollscm:
-          cron: "* * * * *"
+      - reverse:
+          jobs: salt-highstate
+          result: 'success'
