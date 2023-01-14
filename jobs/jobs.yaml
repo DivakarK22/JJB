@@ -79,4 +79,3 @@
     triggers:
       - reverse:
           jobs: salt-highstate
-          result: 'success'
