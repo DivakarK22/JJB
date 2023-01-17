@@ -1,6 +1,6 @@
 - defaults:
     name: global
-    description: 'Managed by jenkins-job-builder - do not edit via web interface. See git@stash:tech/jenkins.git'
+    description: 'Managed by jenkins-job-builder - do not edit via web interface. See https://github.com/DivakarK22/jenkins-job-builder'
     project-type: freestyle
     concurrent: false
     node: Ansible(deploy)
@@ -8,7 +8,7 @@
       - project-view
     logrotate:
       daysToKeep: 1
-      numToKeep: 5
+      numToKeep: 3
 - job:
     name: git-repos-update
     defaults: global
