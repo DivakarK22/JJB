@@ -30,7 +30,7 @@
       - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/salt-update.yaml"
     triggers:
       - reverse:
-          jobs: hooks-jenkins-salt
+          jobs: UPDATE-SALT-FILES-SCM
           result: 'success'
 - job:
     name: UPDATE-SALT-FILES-SCM
@@ -78,4 +78,5 @@
             - master
     triggers:
       - reverse:
-          jobs: salt-highstate
+          jobs: SALT-CALL STATE.HIGHSTATE(ALL HOSTS)
+          result: 'success , failure'
