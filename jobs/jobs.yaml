@@ -79,4 +79,4 @@
     triggers:
       - reverse:
           jobs: SALT-CALL STATE.HIGHSTATE(ALL HOSTS)
-          result: 'success , failure'
+          result: 'success' 'failure'
