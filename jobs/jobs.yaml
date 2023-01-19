@@ -10,21 +10,21 @@
       daysToKeep: 1
       numToKeep: 3
 - job:
-    name: git-repos-update
+    name: GIT-FILES-UPDATE(ALL HOSTS)
     defaults: global
     builders:
       - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/git-repo-update-all.yml"
    # triggers:
     #  - timed: "* * * * *"
 - job:
-    name: repos-update
+    name: YUM-REPOS-UPDATE(ALL HOSTS)
     defaults: global
     builders:
       - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/repo-update.yaml"
  #   triggers:
  #    - timed: "* * * * *"
 - job:
-    name: salt-highstate
+    name: SALT-CALL STATE.HIGHSTATE(ALL HOSTS)
     defaults: global
     builders:
       - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/salt-update.yaml"
@@ -33,7 +33,7 @@
           jobs: hooks-jenkins-salt
           result: 'success'
 - job:
-    name: hooks-jenkins-salt
+    name: UPDATE-SALT-FILES-SCM
     defaults: global
     node: Ansible(deploy)
     builders:
@@ -47,12 +47,12 @@
       - pollscm:
           cron: "* * * * *"
 - job:
-    name: stress-test
+    name: STRESS-TEST(ALL HOSTS)
     defaults: global
     builders:
       - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/stress.yaml"
 - job:
-    name: hooks-jenkins
+    name: UPDATE-JENKINS-JOBS(JENKINS)
     defaults: global
     node: Ansible(deploy)
     builders:
@@ -66,7 +66,7 @@
       - pollscm:
           cron: "* * * * *"
 - job:
-    name: hooks-sensu
+    name: UPDATE-SENSU-SERVER(SENSU)
     defaults: global
     node: Ansible(deploy)
     builders:
