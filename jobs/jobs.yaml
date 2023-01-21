@@ -14,15 +14,15 @@
     defaults: global
     builders:
       - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/git-repo-update-all.yml"
-   # triggers:
-    #  - timed: "* * * * *"
+    triggers:
+      - timed: "H * * * *"
 - job:
     name: YUM-REPOS-UPDATE(ALL HOSTS)
     defaults: global
     builders:
       - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/repo-update.yaml"
- #   triggers:
- #    - timed: "* * * * *"
+    triggers:
+     - timed: "H * * * *"
 - job:
     name: SALT-CALL STATE.HIGHSTATE(ALL HOSTS)
     defaults: global
