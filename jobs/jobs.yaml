@@ -19,6 +19,13 @@
     logrotate:
       daysToKeep: 1
       numToKeep: 3
+- view:
+    name: Defaults
+    view-type: list
+    job-name:
+        - GIT-FILES-UPDATE(ALL HOSTS)
+        - YUM-REPOS-UPDATE(ALL HOSTS)
+        - STRESS-TEST(ALL HOSTS)
 - job:
     name: GIT-FILES-UPDATE(ALL HOSTS)
     defaults: global
