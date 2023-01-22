@@ -4,8 +4,18 @@
     project-type: freestyle
     concurrent: false
     node: Ansible(deploy)
-    views:
-      - project-view
+- view:
+    name: SENSU-CORE
+    view-type: list
+    job-name:
+        - UPDATE-SENSU-CHECKS(SENSU)
+        - UPDATE-SENSU-SERVER-FILES(SENSU)
+- view:
+    name: SALT
+    view-type: list
+    job-name:
+        - SALT-CALL STATE.HIGHSTATE(ALL HOSTS)
+        - UPDATE-SALT-FILES-SCM
     logrotate:
       daysToKeep: 1
       numToKeep: 3
