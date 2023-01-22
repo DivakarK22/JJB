@@ -20,7 +20,7 @@
       daysToKeep: 1
       numToKeep: 3
 - view:
-    name: Defaults
+    name: DEFAULTS
     view-type: list
     job-name:
         - GIT-FILES-UPDATE(ALL HOSTS)
