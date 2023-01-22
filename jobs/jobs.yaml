@@ -80,3 +80,16 @@
       - reverse:
           jobs: SALT-CALL STATE.HIGHSTATE(ALL HOSTS)
           result: 'success'
+      - reverse:
+          jobs: UPDATE-SENSU-SERVER-FILES(SENSU)
+          result: 'success'
+- job:
+    name: UPDATE-SENSU-SERVER-FILES(SENSU)
+    defaults: global
+    node: Ansible(deploy)
+    builders:
+      - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/update-sensu-salt.yml"
+    triggers:
+      - reverse:
+          jobs: SALT-CALL STATE.HIGHSTATE(ALL HOSTS)
+          result: 'failure'
