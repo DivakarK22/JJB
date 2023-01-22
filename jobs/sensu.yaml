@@ -1,0 +1,39 @@
+- defaults:
+    name: global
+    description: 'Managed by jenkins-job-builder - do not edit via web interface. See https://github.com/DivakarK22/jenkins-job-builder'
+    project-type: freestyle
+    concurrent: false
+    node: Ansible(deploy)
+    views:
+      - project-view
+    logrotate:
+      daysToKeep: 1
+      numToKeep: 3
+- job:
+    name: UPDATE-SENSU-CHECKS(SENSU)
+    defaults: global
+    node: Ansible(deploy)
+    builders:
+      - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/restart-sensu.yml"
+    scm:
+      - git:
+          url: https://github.com/DivakarK22/salt.git 
+          branches:
+            - master
+    triggers:
+      - reverse:
+          jobs: SALT-CALL STATE.HIGHSTATE(ALL HOSTS)
+          result: 'success'
+      - reverse:
+          jobs: UPDATE-SENSU-SERVER-FILES(SENSU)
+          result: 'success'
+- job:
+    name: UPDATE-SENSU-SERVER-FILES(SENSU)
+    defaults: global
+    node: Ansible(deploy)
+    builders:
+      - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/update-sensu-salt.yml"
+    triggers:
+      - reverse:
+          jobs: SALT-CALL STATE.HIGHSTATE(ALL HOSTS)
+          result: 'failure'
