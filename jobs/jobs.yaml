@@ -26,6 +26,8 @@
         - GIT-FILES-UPDATE(ALL HOSTS)
         - YUM-REPOS-UPDATE(ALL HOSTS)
         - STRESS-TEST(ALL HOSTS)
+        - UPDATE-JENKINS-JOBS(JENKINS)
+
 - job:
     name: GIT-FILES-UPDATE(ALL HOSTS)
     defaults: global
