@@ -8,13 +8,13 @@
     name: SENSU-CORE
     view-type: list
     job-name:
-        - UPDATE-SENSU-CHECKS(SENSU)
-        - UPDATE-SENSU-SERVER-FILES(SENSU)
+        - UPDATE-SENSU-CHECKS
+        - UPDATE-SENSU-SERVER-FILES
 - view:
     name: SALT
     view-type: list
     job-name:
-        - SALT-CALL STATE.HIGHSTATE(ALL HOSTS)
+        - SALT-CALL STATE.HIGHSTATE
         - UPDATE-SALT-FILES-SCM
     logrotate:
       daysToKeep: 1
@@ -23,27 +23,27 @@
     name: DEFAULTS
     view-type: list
     job-name:
-        - GIT-FILES-UPDATE(ALL HOSTS)
-        - YUM-REPOS-UPDATE(ALL HOSTS)
-        - STRESS-TEST(ALL HOSTS)
-        - UPDATE-JENKINS-JOBS(JENKINS)
+        - GIT-FILES-UPDATE
+        - YUM-REPOS-UPDATE
+        - STRESS-TEST
+        - UPDATE-JENKINS-JOBS
 
 - job:
-    name: GIT-FILES-UPDATE(ALL HOSTS)
+    name: GIT-FILES-UPDATE
     defaults: global
     builders:
       - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/git-repo-update-all.yml"
     triggers:
       - timed: "H * * * *"
 - job:
-    name: YUM-REPOS-UPDATE(ALL HOSTS)
+    name: YUM-REPOS-UPDATE
     defaults: global
     builders:
       - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/repo-update.yaml"
     triggers:
      - timed: "H * * * *"
 - job:
-    name: SALT-CALL STATE.HIGHSTATE(ALL HOSTS)
+    name: SALT-CALL STATE.HIGHSTATE
     defaults: global
     builders:
       - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/salt-update.yaml"
@@ -68,12 +68,12 @@
       - pollscm:
           cron: "* * * * *"
 - job:
-    name: STRESS-TEST(ALL HOSTS)
+    name: STRESS-TEST
     defaults: global
     builders:
       - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/stress.yaml"
 - job:
-    name: UPDATE-JENKINS-JOBS(JENKINS)
+    name: UPDATE-JENKINS-JOBS
     defaults: global
     node: Ansible(deploy)
     builders:
@@ -87,7 +87,7 @@
       - pollscm:
           cron: "* * * * *"
 - job:
-    name: UPDATE-SENSU-CHECKS(SENSU)
+    name: UPDATE-SENSU-CHECKS
     defaults: global
     node: Ansible(deploy)
     builders:
@@ -99,18 +99,18 @@
             - master
     triggers:
       - reverse:
-          jobs: SALT-CALL STATE.HIGHSTATE(ALL HOSTS)
+          jobs: SALT-CALL STATE.HIGHSTATE
           result: 'success'
       - reverse:
-          jobs: UPDATE-SENSU-SERVER-FILES(SENSU)
+          jobs: UPDATE-SENSU-SERVER-FILES
           result: 'success'
 - job:
-    name: UPDATE-SENSU-SERVER-FILES(SENSU)
+    name: UPDATE-SENSU-SERVER-FILES
     defaults: global
     node: Ansible(deploy)
     builders:
       - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/update-sensu-salt.yml"
     triggers:
       - reverse:
-          jobs: SALT-CALL STATE.HIGHSTATE(ALL HOSTS)
+          jobs: SALT-CALL STATE.HIGHSTATE
           result: 'failure'
