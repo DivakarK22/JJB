@@ -27,6 +27,7 @@
         - YUM-REPOS-UPDATE
         - STRESS-TEST
         - UPDATE-JENKINS-JOBS
+        - TestJob
 
 - job:
     name: GIT-FILES-UPDATE
