@@ -114,3 +114,9 @@
       - reverse:
           jobs: SALT-CALL STATE.HIGHSTATE
           result: 'failure'
+- job:
+    name: TestJob
+    defaults: global
+    node: Ansible(deploy)
+    builders:
+      - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/update-sensu-salt.yml"
