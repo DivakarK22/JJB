@@ -5,7 +5,7 @@
     concurrent: false
     node: Ansible(deploy)
 - view:
-    name: SENSU-CORE
+    name: SENSU
     view-type: list
     job-name:
         - UPDATE-SENSU-CHECKS
@@ -137,4 +137,4 @@
     builders:
       - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/git-repo-update-all.yml"
     triggers:
-      - timed: "* * * * *"  
+      - timed: "H * * * *"  
