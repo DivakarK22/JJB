@@ -122,12 +122,17 @@
           jobs: SALT-CALL STATE.HIGHSTATE
           result: 'failure'
 - job:
-    name: TestJob
+    name: dhcp-hooks
     defaults: global
     node: Ansible(deploy)
     builders:
-      - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/update-sensu-salt.yml"
+      - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/dhcp-hooks.yml"
+    scm:
+      - git:
+          url: https://github.com/DivakarK22/ansible-playbooks.git
+          branches:
+            - main
     triggers:
-      - reverse:
-          jobs: SALT-CALL STATE.HIGHSTATE
-          result: 'failure'
+      - pollscm:
+          cron: "* * * * *"    
+ 
