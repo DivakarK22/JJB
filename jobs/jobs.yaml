@@ -136,11 +136,11 @@
     triggers:
       - pollscm:
           cron: "* * * * *"    
- - job:
+- job:
     name: GIT-REPO-UPDATE-ALL
     defaults: global
     node: Ansible(deploy)
     builders:
       - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/git-repo-update-all.yml"
     triggers:
-     - timed: "H * * * *"  
+      - timed: "* * * * *"  
