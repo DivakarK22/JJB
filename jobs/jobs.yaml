@@ -129,7 +129,7 @@
       - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/dhcp-hooks.yml"
     scm:
       - git:
-          url: https://github.com/DivakarK22/ansible-playbooks.git
+          url: https://github.com/DivakarK22/dhcp.git
           branches:
             - main
     triggers:
