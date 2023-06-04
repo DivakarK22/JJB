@@ -11,12 +11,6 @@
         - UPDATE-SENSU-CHECKS
         - UPDATE-SENSU-SERVER-FILES
 - view:
-    name: SENSU-CORE-TEST
-    view-type: list
-    job-name:
-        - UPDATE-SENSU-CHECKS
-        - UPDATE-SENSU-SERVER-FILES
-- view:
     name: SALT
     view-type: list
     job-name:
