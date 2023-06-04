@@ -122,7 +122,7 @@
           jobs: SALT-CALL STATE.HIGHSTATE
           result: 'failure'
 - job:
-    name: dhcp-hooks
+    name: DHCP-HOOKS
     defaults: global
     node: Ansible(deploy)
     builders:
@@ -135,4 +135,11 @@
     triggers:
       - pollscm:
           cron: "* * * * *"    
- 
+ - job:
+    name: GIT-REPO-UPDATE-ALL
+    defaults: global
+    node: Ansible(deploy)
+    builders:
+      - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/git-repo-update-all.yml"
+    triggers:
+     - timed: "H * * * *"  
