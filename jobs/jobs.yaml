@@ -29,21 +29,35 @@
         - UPDATE-JENKINS-JOBS
         - DHCP-HOOKS
         - GIT-REPO-UPDATE-ALL
-
+        - PXE-BOOT-FILES-HOOK
+- view:
+    name: ALL
+    view-type: list
+    job-name:
+        - GIT-FILES-UPDATE
+        - STRESS-TEST
+        - UPDATE-JENKINS-JOBS
+        - DHCP-HOOKS
+        - GIT-REPO-UPDATE-ALL
+        - PXE-BOOT-FILES-HOOK
+        - SALT-CALL STATE.HIGHSTATE
+        - UPDATE-SALT-FILES-SCM
+        - UPDATE-SENSU-CHECKS
+        - UPDATE-SENSU-SERVER-FILES
 #- job:
- #   name: GIT-FILES-UPDATE
-  #  defaults: global
-   # builders:
-    #  - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/git-repo-update-all.yml"
-    #triggers:
-     # - timed: "H * * * *"
+#   name: GIT-FILES-UPDATE
+#  defaults: global
+# builders:
+#  - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/git-repo-update-all.yml"
+#triggers:
+# - timed: "H * * * *"
 #- job:
- #   name: YUM-REPOS-UPDATE
-  #  defaults: global
-   # builders:
-    #  - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/repo-update.yaml"
-     #triggers:
-     #- timed: "H * * * *"
+#   name: YUM-REPOS-UPDATE
+#  defaults: global
+# builders:
+#  - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/repo-update.yaml"
+#triggers:
+#- timed: "H * * * *"
 - job:
     name: SALT-CALL STATE.HIGHSTATE
     defaults: global
@@ -138,3 +152,17 @@
       - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/git-repo-update-all.yml"
     triggers:
       - timed: "H * * * *"  
+- job:
+    name: PXE-BOOT-FILES-HOOK
+    defaults: global
+    node: Ansible(deploy)
+    builders:
+      - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/pxe-hooks.yml"
+    scm:
+      - git:
+          url: https://github.com/DivakarK22/pxe-boot.git
+          branches:
+            - main
+    triggers:
+      - pollscm:
+          cron: "* * * * *"   
