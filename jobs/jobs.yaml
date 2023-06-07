@@ -10,6 +10,9 @@
     job-name:
         - UPDATE-SENSU-CHECKS
         - UPDATE-SENSU-SERVER-FILES
+    logrotate:
+      daysToKeep: 1
+      numToKeep: 3
 - view:
     name: SALT
     view-type: list
@@ -30,6 +33,9 @@
         - DHCP-HOOKS
         - GIT-REPO-UPDATE-ALL
         - PXE-BOOT-FILES-HOOK
+    logrotate:
+      daysToKeep: 1
+      numToKeep: 3
 - view:
     name: ALL
     view-type: list
