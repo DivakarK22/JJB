@@ -23,20 +23,6 @@
       daysToKeep: 1
       numToKeep: 3
 - view:
-    name: DEFAULTS
-    view-type: list
-    job-name:
-        - GIT-FILES-UPDATE
-#        - YUM-REPOS-UPDATE
-        - STRESS-TEST
-        - UPDATE-JENKINS-JOBS
-        - DHCP-HOOKS
-        - GIT-REPO-UPDATE-ALL
-        - PXE-BOOT-FILES-HOOK
-    logrotate:
-      daysToKeep: 1
-      numToKeep: 3
-- view:
     name: ALL
     view-type: list
     job-name:
@@ -50,6 +36,10 @@
         - UPDATE-SALT-FILES-SCM
         - UPDATE-SENSU-CHECKS
         - UPDATE-SENSU-SERVER-FILES
+    logrotate:
+      daysToKeep: 1
+      numToKeep: 3
+
 - job:
     name: GIT-FILES-UPDATE
     defaults: global
