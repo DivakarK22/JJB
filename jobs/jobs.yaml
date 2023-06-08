@@ -50,23 +50,26 @@
         - UPDATE-SALT-FILES-SCM
         - UPDATE-SENSU-CHECKS
         - UPDATE-SENSU-SERVER-FILES
-#- job:
-#   name: GIT-FILES-UPDATE
-#  defaults: global
-# builders:
-#  - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/git-repo-update-all.yml"
-#triggers:
-# - timed: "H * * * *"
-#- job:
-#   name: YUM-REPOS-UPDATE
-#  defaults: global
-# builders:
-#  - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/repo-update.yaml"
-#triggers:
-#- timed: "H * * * *"
+- job:
+    name: GIT-FILES-UPDATE
+    defaults: global
+    disabled: true
+    builders:
+      - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/git-repo-update-all.yml"
+    triggers:
+      - timed: "H * * * *"
+- job:
+   name: YUM-REPOS-UPDATE
+   defaults: global
+   disabled: true
+   builders:
+     - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/repo-update.yaml"
+   triggers:
+     - timed: "H * * * *"
 - job:
     name: SALT-CALL STATE.HIGHSTATE
     defaults: global
+    disabled: true
     builders:
       - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/salt-update.yaml"
     triggers:
