@@ -36,6 +36,7 @@
         - UPDATE-SALT-FILES-SCM
         - UPDATE-SENSU-CHECKS
         - UPDATE-SENSU-SERVER-FILES
+        - FTP_REFRESH
     logrotate:
       daysToKeep: 1
       numToKeep: 3
@@ -150,7 +151,7 @@
     builders:
       - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/git-repo-update-all.yml"
     triggers:
-      - timed: "H * * * *"  
+      - timed: "* * * * *"  
 - job:
     name: PXE-BOOT-FILES-HOOK
     defaults: global
@@ -165,3 +166,9 @@
     triggers:
       - pollscm:
           cron: "* * * * *"   
+- job:
+    name: FTP_REFRESH
+    defaults: global
+    node: Ansible(deploy)
+    builders:
+      - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/ftp-refresh.yml"
