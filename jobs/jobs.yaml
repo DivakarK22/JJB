@@ -4,43 +4,44 @@
     project-type: freestyle
     concurrent: false
     node: Ansible(deploy)
-- view:
-    name: SENSU
-    view-type: list
-    job-name:
-        - UPDATE-SENSU-CHECKS
-        - UPDATE-SENSU-SERVER-FILES
-    logrotate:
-      daysToKeep: 1
-      numToKeep: 3
-- view:
-    name: SALT
-    view-type: list
-    job-name:
-        - SALT-CALL STATE.HIGHSTATE
-        - UPDATE-SALT-FILES-SCM
-    logrotate:
-      daysToKeep: 1
-      numToKeep: 3
-- view:
-    name: ALL
-    view-type: list
-    job-name:
-        - GIT-FILES-UPDATE
-        - STRESS-TEST
-        - UPDATE-JENKINS-JOBS
-        - DHCP-HOOKS
-        - GIT-REPO-UPDATE-ALL
-        - PXE-BOOT-FILES-HOOK
-        - SALT-CALL STATE.HIGHSTATE
-        - UPDATE-SALT-FILES-SCM
-        - UPDATE-SENSU-CHECKS
-        - UPDATE-SENSU-SERVER-FILES
-        - FTP_REFRESH
-    logrotate:
-      daysToKeep: 1
-      numToKeep: 3
-
+####################################################REMOVED VIEWS#####################################################################
+#- view:
+#    name: SENSU
+#    view-type: list
+#    job-name:
+#        - UPDATE-SENSU-CHECKS
+#        - UPDATE-SENSU-SERVER-FILES
+#    logrotate:
+#      daysToKeep: 1
+#      numToKeep: 3
+#- view:
+#    name: SALT
+#    view-type: list
+#    job-name:
+#        - SALT-CALL STATE.HIGHSTATE
+#        - UPDATE-SALT-FILES-SCM
+#    logrotate:
+#      daysToKeep: 1
+#      numToKeep: 3
+#- view:
+#    name: ALL
+#    view-type: list
+#    job-name:
+#       - GIT-FILES-UPDATE
+#        - STRESS-TEST
+#        - UPDATE-JENKINS-JOBS
+#        - DHCP-HOOKS
+#        - GIT-REPO-UPDATE-ALL
+#        - PXE-BOOT-FILES-HOOK
+#        - SALT-CALL STATE.HIGHSTATE
+#        - UPDATE-SALT-FILES-SCM
+#        - UPDATE-SENSU-CHECKS
+#        - UPDATE-SENSU-SERVER-FILES
+#        - FTP_REFRESH
+#    logrotate:
+#      daysToKeep: 1
+#      numToKeep: 3
+###########################################################################################################################################
 - job:
     name: GIT-FILES-UPDATE
     defaults: global
