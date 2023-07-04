@@ -1,6 +1,6 @@
 - defaults:
     name: global
-    description: 'Managed by jenkins-job-builder - do not edit via web interface. See https://github.com/DivakarK22/jenkins-job-builder'
+    description: 'Managed by jenkins-job-builder See --> https://github.com/DivakarK22/jenkins-job-builder'
     project-type: freestyle
     concurrent: false
     node: Ansible(deploy)
