@@ -74,7 +74,7 @@
     defaults: global
     node: Ansible(deploy)
     builders:
-      - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/jenkins-hooks.yml"
+      - shell: "docker run -v $HOME/git/jenkins-job-builder:/tmp/jenkins-job -w /tmp/jenkins-job osmman/jenkins-job-builder --flush-cache --ignore-cache  --conf /tmp/jenkins-job/jenkins_jobs.ini update --delete-old /tmp/jenkins-job/jobs/jobs.yaml"
     scm:
       - git:
           url: https://github.com/DivakarK22/jenkins-job-builder.git
