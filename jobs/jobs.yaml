@@ -3,7 +3,7 @@
     description: 'Managed by jenkins-job-builder - do not edit via web interface. See https://github.com/DivakarK22/jenkins-job-builder'
     project-type: freestyle
     concurrent: false
-    node: Built-In Node
+    node: built-in
 - view:
     name: ALL
     view-type: list
