@@ -158,5 +158,4 @@
     defaults: global
     node: Ansible(deploy)
     builders:
-      - shell: "docker run --rm --link sonarqube -e SONAR_HOST_URL="http://192.168.1.10:9000" -e SONAR_LOGIN="sqp_b952cc6f85a8a545aa16c8375f0669ebfd1510b2" -v "/root/git/divakark22.github.io:/usr/src" sonarsource/sonar-scanner-cli
-      "
+      - shell: "bash /root/git/jenkins-job-builder/exec.sh"
