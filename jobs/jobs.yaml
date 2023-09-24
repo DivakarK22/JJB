@@ -19,6 +19,7 @@
         - UPDATE-SENSU-CHECKS
         - UPDATE-SENSU-SERVER-FILES
         - FTP_REFRESH
+        - SONARSCAN_GIT_PORTFOLIO
     logrotate:
       daysToKeep: 1
       numToKeep: 3
