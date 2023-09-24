@@ -147,9 +147,9 @@
     triggers:
       - pollscm:
           cron: "* * * * *"   
-- job:
-    name: FTP_REFRESH
-    defaults: global
-    node: Ansible(deploy)
-    builders:
-      - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/ftp-refresh.yml"
+#- job:
+#    name: FTP_REFRESH
+#    defaults: global
+#    node: Ansible(deploy)
+#    builders:
+#      - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/ftp-refresh.yml"
