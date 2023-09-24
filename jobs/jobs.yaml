@@ -64,11 +64,11 @@
     triggers:
       - pollscm:
           cron: "* * * * *"
-- job:
-    name: STRESS-TEST
-    defaults: global
-    builders:
-      - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/stress.yaml"
+#- job:
+#    name: STRESS-TEST
+#    defaults: global
+#    builders:
+#      - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/stress.yaml"
 - job:
     name: UPDATE-JENKINS-JOBS
     defaults: global
