@@ -55,6 +55,7 @@
     name: UPDATE-SALT-FILES-SCM
     defaults: global
     node: Ansible(deploy)
+    disabled: true
     builders:
       - shell: "ansible-playbook /root/git/ansible-playbooks/jenkins-playbooks/salt-repo.yaml"
     scm:
@@ -65,11 +66,12 @@
     triggers:
       - pollscm:
           cron: "* * * * *"
-#- job:
-#    name: STRESS-TEST
-#    defaults: global
-#    builders:
-#      - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/stress.yaml"
+- job:
+    name: STRESS-TEST
+    defaults: global
+    disabled: true
+    builders:
+      - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/stress.yaml"
 - job:
     name: UPDATE-JENKINS-JOBS
     defaults: global
@@ -88,6 +90,7 @@
     name: UPDATE-SENSU-CHECKS
     defaults: global
     node: Ansible(deploy)
+    disabled: true
     builders:
       - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/restart-sensu.yml"
     scm:
@@ -106,6 +109,7 @@
     name: UPDATE-SENSU-SERVER-FILES
     defaults: global
     node: Ansible(deploy)
+    disabled: true
     builders:
       - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/update-sensu-salt.yml"
     triggers:
@@ -116,6 +120,7 @@
     name: DHCP-HOOKS
     defaults: global
     node: Ansible(deploy)
+    disabled: true
     builders:
       - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/dhcp-hooks.yml"
     scm:
@@ -138,6 +143,7 @@
     name: PXE-BOOT-FILES-HOOK
     defaults: global
     node: Ansible(deploy)
+    disabled: true
     builders:
       - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/pxe-hooks.yml"
     scm:
@@ -148,15 +154,17 @@
     triggers:
       - pollscm:
           cron: "* * * * *"   
-#- job:
-#    name: FTP_REFRESH
-#    defaults: global
-#    node: Ansible(deploy)
-#    builders:
-#      - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/ftp-refresh.yml"
+- job:
+    name: FTP_REFRESH
+    defaults: global
+    disabled: true
+    node: Ansible(deploy)
+    builders:
+      - shell: "ansible-playbook  /root/git/ansible-playbooks/jenkins-playbooks/ftp-refresh.yml"
 - job:
     name: SONARSCAN_GIT_PORTFOLIO
     defaults: global
+    disabled: true
     node: Ansible(deploy)
     builders:
       - shell: "bash /root/git/jenkins-job-builder/exec.sh"
